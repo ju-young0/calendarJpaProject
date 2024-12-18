@@ -39,6 +39,16 @@ public class UserController {
         return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
     }
 
+    // 유저 수정
+    @PatchMapping("/{id}")
+    public ResponseEntity<UserResponseDto> update(@PathVariable Long id, @RequestBody LoginRequestDto requestDto){
+
+        UserResponseDto updateUser = userService.update(id, requestDto.getEmail(), requestDto.getPassword());
+
+        return new ResponseEntity<>(updateUser, HttpStatus.OK);
+    }
+
+
     // 유저 삭제
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {

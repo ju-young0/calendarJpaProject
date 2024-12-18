@@ -49,6 +49,15 @@ public class UserService {
         return UserResponseDto.toDto(findUser);
     }
 
+    public UserResponseDto update(Long id, String email, String password) {
+
+        User findUser = userRepository.findByIdOrElseThrow(id);
+
+        findUser.update(email, password);
+
+        return UserResponseDto.toDto(findUser);
+    }
+
     public void  delete(Long id) {
 
         User findUser = userRepository.findByIdOrElseThrow(id);
