@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.util.PatternMatchUtils;
 
 import java.io.IOException;
@@ -25,9 +26,7 @@ public class LoginFilter implements Filter {
 
         // 다운캐스팅
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-
         log.info("로그인 필터 로직 실행");
-
         // WHITE_LIST에 포함되어 있지 않다면
         if (!isWhiteList(requestURI)) {
 
@@ -37,7 +36,11 @@ public class LoginFilter implements Filter {
 
             // 로그인하지 않은 사용자일 경우
             if (session == null || session.getAttribute("SESSION_KEY") == null) {
-                throw new RuntimeException("로그인 해주세요.");
+//                throw new RuntimeException("로그인 해주세요.");
+                httpResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+                httpResponse.setContentType("application/json");
+                httpResponse.getWriter().write("{\"error\": \"Log in is required.\"}");
+                return;
             }
 
             // 로그인 한 사용자일 경우

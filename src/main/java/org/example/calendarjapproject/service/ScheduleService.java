@@ -1,5 +1,6 @@
 package org.example.calendarjapproject.service;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.calendarjapproject.dto.ScheduleResponseDto;
@@ -16,10 +17,12 @@ public class ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
     private final UserService userService;
+    private final HttpSession session;
 
     @Transactional
-    public ScheduleResponseDto save(Long userId, String title, String contents) {
+    public ScheduleResponseDto save(String title, String contents) {
 
+        Long userId = (Long) session.getAttribute("SESSION_KEY");
         // 요청 userName을 갖는 유저 조회
         User findUser = userService.findUserById(userId);
 

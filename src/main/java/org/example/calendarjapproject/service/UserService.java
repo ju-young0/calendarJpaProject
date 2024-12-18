@@ -1,5 +1,6 @@
 package org.example.calendarjapproject.service;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.example.calendarjapproject.dto.LoginRequestDto;
 import org.example.calendarjapproject.dto.UserResponseDto;
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final HttpSession session;
 
     public UserSignUpResponseDto signUp(String username, String email, String password) {
 
@@ -49,6 +51,8 @@ public class UserService {
         User findUser = userRepository.findByIdOrElseThrow(id);
 
         userRepository.delete(findUser);
+
+        session.invalidate();
     }
 
     public User findUserById(Long userId) {
