@@ -42,9 +42,6 @@ public class ScheduleService {
 
     public ScheduleResponseDto findById(Long id) {
 
-        // Schedule Entity가 아닌 Optional 형태로 반환이 되므로
-        //Optional<Schedule> optionalSchedule = scheduleRepository.findById(id);
-
         // scheduleRepository 내에서 default로 선언한 메서드를 사용하여 바로 Schedule Entity로 반환받는다! (id를 통해 특정 게시물 조회)
         Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
 
@@ -58,7 +55,7 @@ public class ScheduleService {
         // 요청한 id로 해당 일정 조회
         Schedule findSchedule = scheduleRepository.findByIdOrElseThrow(id);
 
-        // 일정에 제목, 내용, 이름 저장
+        // 일정에 제목, 내용 저장
         findSchedule.update(title, contents);
 
         return ScheduleResponseDto.toDto(findSchedule);
