@@ -10,6 +10,7 @@
 | 회원가입 | `POST` | /users/signup | 200 |
 | 로그인 | `POST` | /users/login | 200 |
 | 로그아웃 | `POST` | /users/logout | 200 |
+| 유저 수정 | `PATCH` | /users/`{id}` | 200 |
 | 유저 삭제 | `DELETE` | /users/`{id}` | 200 |
 
 ### 2. 일정 api
@@ -83,6 +84,22 @@
     "contents": "수정된 내용2",
     "createdAt": "2024-12-09T19:13:23",
     "updatedAt": "2024-12-09T19:17:57"
+}
+```
+### 5. 유저 수정 PATCH
+```
+{
+    "email" : "aaa1@ko.com",
+    "password" : "222"
+}
+```
+```
+{
+    "id": 1,
+    "username": "홍길동",
+    "email": "aaa1@ko.com",
+    "createdAt": "2024-12-18T20:25:53.880293",
+    "updatedAt": "2024-12-18T20:25:53.880293"
 }
 ```
 ## 오류 응답 코드
