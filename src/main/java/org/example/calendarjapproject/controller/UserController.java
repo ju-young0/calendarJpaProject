@@ -2,6 +2,7 @@ package org.example.calendarjapproject.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.calendarjapproject.dto.LoginRequestDto;
 import org.example.calendarjapproject.dto.UserResponseDto;
@@ -22,7 +23,7 @@ public class UserController {
 
     // 유저 저장
     @PostMapping("/signup")
-    public ResponseEntity<UserSignUpResponseDto> signUp(@RequestBody UserSignUpRequestDto requestDto) {
+    public ResponseEntity<UserSignUpResponseDto> signUp(@Valid @RequestBody UserSignUpRequestDto requestDto) {
 
         UserSignUpResponseDto userSignUpResponseDto = userService.signUp(requestDto.getUsername(), requestDto.getEmail(), requestDto.getPassword());
 

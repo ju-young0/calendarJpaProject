@@ -1,5 +1,6 @@
 package org.example.calendarjapproject.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.calendarjapproject.dto.ScheduleCreateRequestDto;
 import org.example.calendarjapproject.dto.ScheduleResponseDto;
@@ -19,7 +20,7 @@ public class ScheduleController {
     private final ScheduleService scheduleService;
 
     @PostMapping
-    public ResponseEntity<ScheduleResponseDto> save(@RequestBody ScheduleCreateRequestDto requestDto) {
+    public ResponseEntity<ScheduleResponseDto> save(@Valid @RequestBody ScheduleCreateRequestDto requestDto) {
 
         ScheduleResponseDto scheduleResponseDto = scheduleService.save(requestDto.getTitle(), requestDto.getContents());
 
