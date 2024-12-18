@@ -2,6 +2,7 @@ package org.example.calendarjapproject.service;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.example.calendarjapproject.config.PasswordEncoder;
 import org.example.calendarjapproject.dto.LoginRequestDto;
 import org.example.calendarjapproject.dto.UserResponseDto;
 import org.example.calendarjapproject.dto.UserSignUpResponseDto;
@@ -20,11 +21,13 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final HttpSession session;
+    private final PasswordEncoder passwordEncoder;
 
     public UserSignUpResponseDto signUp(String username, String email, String password) {
 
+        String encodedPassword = passwordEncoder.encode(password);
         // 요청 값들로 객체 생성 후 DB에 저장
-        User user = new User(username, email, password);
+        User user = new User(username, email, encodedPassword);
         User savedUser = userRepository.save(user);
 
         return UserSignUpResponseDto.toDto(savedUser);
@@ -64,7 +67,7 @@ public class UserService {
         User user = userRepository.findByEmail(loginRequestDto.getEmail());
 
         // 이메일이 없거나 비밀번호가 다른 경우
-        if (user == null || !Objects.equals(user.getPassword(), loginRequestDto.getPassword())) {
+        if (user == null || !passwordEncoder.matches(loginRequestDto.getPassword(), user.getPassword())) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "유효하지 않은 사용자 이름 혹은 잘못된 비밀번호");
         }
 
