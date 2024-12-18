@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @SpringBootApplication
 public class CalendarJapProjectApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(CalendarJapProjectApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(CalendarJapProjectApplication.class, args);
+	}
 
 }
