@@ -10,7 +10,7 @@
 | 회원가입 | `POST` | /users/signup | 200 |
 | 로그인 | `POST` | /users/login | 200 |
 | 로그아웃 | `POST` | /users/logout | 200 |
-| 유저 수정 | `PATCH` | /users/`{id}` | 200 |
+| 유저 수정 | `PATCH` | /users/`{id}` | 200 |
 | 유저 삭제 | `DELETE` | /users/`{id}` | 200 |
 
 ### 2. 일정 api
