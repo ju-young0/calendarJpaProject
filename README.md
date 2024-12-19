@@ -10,6 +10,7 @@
 | 회원가입 | `POST` | /users/signup | 200 |
 | 로그인 | `POST` | /users/login | 200 |
 | 로그아웃 | `POST` | /users/logout | 200 |
+| 유저 조회 | `GET` | /users/`{id}` | 200 |
 | 유저 수정 | `PATCH` | /users/`{id}` | 200 |
 | 유저 삭제 | `DELETE` | /users/`{id}` | 200 |
 
@@ -102,6 +103,7 @@
     "updatedAt": "2024-12-18T20:25:53.880293"
 }
 ```
+</br>
 ## 오류 응답 코드
 - 404 : 요청한 리소스를 찾을 수 없습니다.
 - 405 : get메소드를 불러올 수 없습니다.
@@ -110,3 +112,15 @@
 
 ## 🧲 ERD
 ![스크린샷 2024-12-18 20 03 13](https://github.com/user-attachments/assets/681a0039-ea44-49d3-bbb2-8f7866fbda9a)
+</br>
+
+## ⚔️ Trouble Shooting
+### 1. 유저 삭제
+- 유저 삭제 할때 id로 삭제할려니 에러가 났다.
+- 조회했을때 id로 삭제가 아닌 유저id로 삭제를 해야했다.
+- user Entity는 다수의 Schedule Entity를 가질수 있기 때문에 List<Schedule> 형으로 객체를 정의한다.
+- 사용자 한명의 여러개의 일정을 가질수 있으므로 @OnetToMany 어노테이션을 추가했다.
+- <img width="600" alt="스크린샷 2024-12-19 09 46 59" src="https://github.com/user-attachments/assets/9c440d90-0aa9-45a7-b58f-8928c143a495" />
+- 유저 삭제 성공!
+
+</br>
